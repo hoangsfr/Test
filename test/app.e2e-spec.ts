@@ -18,7 +18,13 @@ describe('AppController (e2e)', () => {
       imports: [AppModule],
     })
       .overrideProvider(getDataSourceToken())
-      .useValue({ isInitialized: true, destroy: jest.fn() })
+      .useValue({
+        isInitialized: true,
+        destroy: jest.fn(),
+        entityMetadatas: [],
+        options: { type: 'mysql' },
+        getRepository: jest.fn(() => ({})),
+      })
       .compile();
 
     app = moduleFixture.createNestApplication();

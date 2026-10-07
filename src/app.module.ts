@@ -8,6 +8,9 @@ import { AppService } from './app.service';
 import { Book } from './entities/book.entity';
 import { Reader } from './entities/reader.entity';
 import { BorrowedRecord } from './entities/borrowed-record.entity';
+import { BooksModule } from './books/books.module';
+import { ReadersModule } from './readers/readers.module';
+import { BorrowedRecordsModule } from './borrowed-records/borrowed-records.module';
 
 @Module({
   imports: [
@@ -33,6 +36,9 @@ import { BorrowedRecord } from './entities/borrowed-record.entity';
         };
       },
     }),
+    BooksModule,
+    ReadersModule,
+    BorrowedRecordsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
