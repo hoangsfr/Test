@@ -34,6 +34,27 @@ export class BorrowedRecordsService {
     return this.records.find({ relations: { book: true, reader: true } });
   }
 
+  async findBorrowedBooks() {
+    const records = await this.records.find({
+      where: { status: BorrowedRecordStatus.BORROWED },
+      relations: { book: true, reader: true },
+      order: { borrowedAt: 'DESC' },
+    });
+
+    return records.map((record) => ({
+      id: record.book.id,
+      title: record.book.title,
+      author: record.book.author,
+      isbn: record.book.isbn,
+      borrowedAt: record.borrowedAt,
+      borrower: {
+        id: record.reader.id,
+        fullName: record.reader.fullName,
+      },
+      dueAt: record.dueAt,
+    }));
+  }
+
   async findOne(id: number): Promise<BorrowedRecord> {
     const record = await this.records.findOne({
       where: { id },

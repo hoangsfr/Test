@@ -19,6 +19,11 @@ export class BorrowedRecordsController {
     return this.recordsService.findAll();
   }
 
+  @Get('borrowed-books')
+  findBorrowedBooks() {
+    return this.recordsService.findBorrowedBooks();
+  }
+
   @Get(':id')
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.recordsService.findOne(id);
